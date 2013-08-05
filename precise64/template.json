@@ -35,5 +35,11 @@
         ],
 
         "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'"
-    }]
+    }],
+    "post-processors": [
+        {
+            "type": "vagrant",
+            "keep_input_artifact": true
+        }
+    ]
 }
