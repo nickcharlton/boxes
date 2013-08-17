@@ -9,7 +9,7 @@ apt-get -qy upgrade
 
 # install some oft used packages
 apt-get -qy install linux-headers-$(uname -r) build-essential
-apt-get -qy install zlig1g-dev libssl-dev
+apt-get -qy install zlib1g-dev libssl-dev
 apt-get -qy install ruby1.9.1 ruby1.9.1-dev
 
 # clean up
