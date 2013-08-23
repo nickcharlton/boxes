@@ -10,7 +10,7 @@
         }
     ],
     "builders": [{
-        "name": "precise64_chef",
+        "name": "precise64-chef",
         "type": "virtualbox",
         "guest_os_type": "Ubuntu_64",
 

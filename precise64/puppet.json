@@ -10,7 +10,7 @@
         }
     ],
     "builders": [{
-        "name": "precise64_puppet",
+        "name": "precise64-puppet",
         "type": "virtualbox",
         "guest_os_type": "Ubuntu_64",
 
