@@ -9,7 +9,7 @@ the formats you need) to keep the underlying box updated.
 ## Requirements
 
 * make
-* Packer >= v0.2.1
+* Packer >= v0.3.4
 * Vagrant >= v1.2.3
 * Vagrant VMware provider (if you intend to use VMware boxes).
 
