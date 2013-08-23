@@ -12,9 +12,6 @@ apt-get -qy install linux-headers-$(uname -r) build-essential
 apt-get -qy install zlib1g-dev libssl-dev
 apt-get -qy install ruby1.9.1 ruby1.9.1-dev
 
-# clean up
-apt-get clean
-
 # configure password-less sudo
 usermod -a -G sudo vagrant
 echo "%vagrant ALL=NOPASSWD:ALL" > /tmp/vagrant
@@ -27,9 +24,6 @@ curl -Lo /home/vagrant/.ssh/authorized_keys \
   'https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub'
 chmod 0600 /home/vagrant/.ssh/authorized_keys
 chown -R vagrant:vagrant /home/vagrant/.ssh
-
-# tidy up DHCP leases.
-rm /var/lib/dhcp/*
 
 # clean up any artifacts
 rm -f /home/vagrant/shutdown.sh
