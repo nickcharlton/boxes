@@ -3,6 +3,6 @@
 apt-get -qy install dkms
 mount -o loop /home/vagrant/VBoxGuestAdditions.iso /mnt
 sh /mnt/VBoxLinuxAdditions.run
-unmount /mnt
+umount /mnt
 
 rm -f /home/vagrant/VBoxGuestAdditions.iso
