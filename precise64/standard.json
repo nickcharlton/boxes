@@ -3,7 +3,9 @@
         {
             "type": "shell",
             "scripts": [
-                "common/postinstall.sh"
+                "common/postinstall.sh",
+                "common/chef.sh",
+                "common/puppet.sh"
             ],
             "execute_command": "echo 'vagrant'|sudo -S sh '{{ .Path }}'"
         }

@@ -13,5 +13,5 @@ all: precise64
 # target: precise64 - Ubuntu 12.04 (Precise) 64-bit
 precise64: packer_precise64_virtualbox.box
 
-packer_precise64_virtualbox.box: precise64/template.json
-	packer build precise64/template.json
+packer_precise64_virtualbox.box: precise64/standard.json
+	packer build precise64/standard.json
