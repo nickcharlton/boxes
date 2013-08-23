@@ -33,6 +33,5 @@ rm /var/lib/dhcp/*
 
 # clean up any artifacts
 rm -f /home/vagrant/shutdown.sh
-rm -f /home/vagrant/VBoxGuestAdditions.iso
 
 exit

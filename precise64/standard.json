@@ -4,6 +4,7 @@
             "type": "shell",
             "scripts": [
                 "common/postinstall.sh",
+                "common/virtualbox.sh",
                 "common/chef.sh",
                 "common/puppet.sh"
             ],
