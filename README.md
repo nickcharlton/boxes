@@ -21,8 +21,10 @@ You will also need VirtualBox or VMware Fusion/Workstation.
 
 Copyright (c) 2013 Nick Charlton. MIT licensed.
 
-This is inspired by the [GDS's boxes repo][gds].
+This is inspired by the [GDS's boxes repo][gds], and would have been impossible
+without some of the scripts which accompany [VeeWee][].
 
 [gds]: https://github.com/alphagov/boxes
 [post]: http://nickcharlton.net/posts/vagrant-boxes-with-packer.html
+[VeeWee]: https://github.com/jedi4ever/veewee
 
