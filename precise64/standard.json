@@ -4,12 +4,12 @@
             "type": "shell",
             "scripts": [
                 "common/postinstall.sh",
-                "common/virtualbox.sh",
+                "common/vmtools.sh",
                 "common/chef.sh",
                 "common/puppet.sh",
                 "common/purge.sh"
             ],
-            "execute_command": "echo 'vagrant'|sudo -S sh '{{ .Path }}'"
+            "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
         }
     ],
     "builders": [{
