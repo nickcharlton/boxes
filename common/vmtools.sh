@@ -14,6 +14,11 @@ case $PACKER_BUILDER_TYPE in
         
         rm -f /home/vagrant/VBoxGuestAdditions.iso
     ;;
+    'vmware')
+        echo "Installing VMware Tools..."
+        echo "vmware matched. /home/vagrant looks like:"
+        ls ~/
+    ;;
     *)
         printf "Nothing to do for the %s builder type.\n" $PACKER_BUILDER_TYPE
     ;;
