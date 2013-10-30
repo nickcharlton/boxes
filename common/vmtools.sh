@@ -16,8 +16,15 @@ case $PACKER_BUILDER_TYPE in
     ;;
     'vmware')
         echo "Installing VMware Tools..."
-        echo "vmware matched. /home/vagrant looks like:"
-        ls ~/
+        mkdir -p /mnt/cdrom
+        mount -o loop /home/vagrant/linux.iso /mnt/cdrom
+
+        cd /tmp
+        tar -zxpf /mnt/cdrom/VMwareTools-*.tar.gz -C /tmp/
+        /tmp/vmware-tools-distrib/vmware-install.pl -d
+
+        umount /mnt/cdrom
+        rm -f /home/vagrant/linux.iso
     ;;
     *)
         printf "Nothing to do for the %s builder type.\n" $PACKER_BUILDER_TYPE
