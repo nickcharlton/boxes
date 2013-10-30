@@ -1,3 +1,4 @@
 output-*
 *.box
 packer_cache/
+tmp/
