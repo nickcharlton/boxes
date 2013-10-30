@@ -5,15 +5,20 @@
             "scripts": [
                 "common/postinstall.sh",
                 "common/vmtools.sh",
+                <%- if @type == "standard" -%>
                 "common/chef.sh",
+                "common/puppet.sh",
+                <%- else -%>
+                "common/<%= @type %>.sh",
+                <%- end -%>
                 "common/purge.sh"
             ],
             "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
         }
     ],
     "builders": [{
-        "name": "wheezy64-chef",
-        "type": "virtualbox",
+        "name": "wheezy64-<%= @type %>",
+        "type": "<%= @target %>",
         "guest_os_type": "Debian_64",
 
         "iso_url": "http://cdimage.debian.org/debian-cd/7.2.0/amd64/iso-cd/debian-7.2.0-amd64-netinst.iso",
