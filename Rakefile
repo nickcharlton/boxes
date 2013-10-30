@@ -24,7 +24,7 @@ namespace :build do
             @type = attribs[1]
             @target = attribs[2]
 
-            packer_template = ERB.new template
+            packer_template = ERB.new(template, nil, '-')
             
             # ensure tmp/ exists
             FileUtils.mkdir_p('tmp')

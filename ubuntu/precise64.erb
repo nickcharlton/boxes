@@ -5,7 +5,12 @@
             "scripts": [
                 "common/postinstall.sh",
                 "common/vmtools.sh",
+                <%- if @type == "standard" -%>
+                "common/chef.sh",
+                "common/puppet.sh",
+                <%- else -%>
                 "common/<%= @type %>.sh",
+                <%- end -%>
                 "common/purge.sh"
             ],
             "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
