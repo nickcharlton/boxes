@@ -5,15 +5,15 @@
             "scripts": [
                 "common/postinstall.sh",
                 "common/vmtools.sh",
-                "common/chef.sh",
+                "common/<%= type %>.sh",
                 "common/purge.sh"
             ],
             "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
         }
     ],
     "builders": [{
-        "name": "precise64-chef",
-        "type": "virtualbox",
+        "name": "precise64-<%= type %>",
+        "type": "<%= target %>",
         "guest_os_type": "Ubuntu_64",
 
         "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.3-server-amd64.iso",
@@ -23,7 +23,7 @@
         "ssh_username": "vagrant",
         "ssh_password": "vagrant",
 
-        "http_directory": "precise64",
+        "http_directory": "ubuntu",
 
         "boot_command": [
             "<esc><esc><enter><wait>",
