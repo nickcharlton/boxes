@@ -5,15 +5,15 @@
             "scripts": [
                 "common/postinstall.sh",
                 "common/vmtools.sh",
-                "common/<%= type %>.sh",
+                "common/<%= @type %>.sh",
                 "common/purge.sh"
             ],
             "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
         }
     ],
     "builders": [{
-        "name": "precise64-<%= type %>",
-        "type": "<%= target %>",
+        "name": "precise64-<%= @type %>",
+        "type": "<%= @target %>",
         "guest_os_type": "Ubuntu_64",
 
         "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.3-server-amd64.iso",
