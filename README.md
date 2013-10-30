@@ -28,7 +28,14 @@ rake build:precise64-standard-virtualbox
 rake build:precise64-chef-virtualbox
 rake build:wheezy64-standard-virtualbox
 rake build:wheezy64-chef-virtualbox
+<snip>
 ```
+
+`standard` aims to follow the pattern followed by the default Vagrantboxes (both
+Puppet and Chef), using the recommended installation method for each.
+
+With a reasonably fast internet connection and SSD, the time taken to build each
+both is approximately 15-20 minutes. (Or about 4 hours for two sets of each distro.)
 
 ## Credits
 
