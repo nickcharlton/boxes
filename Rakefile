@@ -53,5 +53,10 @@ namespace :build do
   end
 end
 
+desc 'Clean up any temporary directories and files'
+task :clean do
+  FileUtils.rm_rf('tmp')
+end
+
 desc 'Build all of the configurations'
 task :default => 'build:default'
