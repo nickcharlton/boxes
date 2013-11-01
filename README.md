@@ -10,7 +10,8 @@ keep the boxes you use with Vagrant updated.
 * Packer >= v0.3.4
 
 You will also need VirtualBox and/or VMware Fusion/Workstation compatible with 
-Packer.
+Packer (and, in the case of VMware Fusion, ensured that the virtual machine tools
+are downloaded and available).
 
 ## Usage
 
@@ -35,7 +36,8 @@ rake build:wheezy64-chef-virtualbox
 Puppet and Chef), using the recommended installation method for each.
 
 With a reasonably fast internet connection and SSD, the time taken to build each
-both is approximately 15-20 minutes. (Or about 4 hours for two sets of each distro.)
+both is approximately 15-20 minutes. (Or about 2 hours for a complete set per 
+distro.)
 
 ## Credits
 
@@ -45,7 +47,6 @@ This is inspired by the [GDS's boxes repo][gds], and would have been impossible
 without some of the scripts which accompany [VeeWee][].
 
 [gds]: https://github.com/alphagov/boxes
-[post]: http://nickcharlton.net/posts/vagrant-boxes-with-packer.html
 [VeeWee]: https://github.com/jedi4ever/veewee
 [rake]: http://rake.rubyforge.org
 [erb]: http://ruby-doc.org/stdlib-2.0.0/libdoc/erb/rdoc/ERB.html
