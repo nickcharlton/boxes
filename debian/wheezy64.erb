@@ -16,41 +16,45 @@
             "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
         }
     ],
-    "builders": [{
-        "name": "wheezy64-<%= @type %>",
-        "type": "<%= @target %>",
-        <%- if @target == "vmware" -%>
-        "guest_os_type": "debian7-64",
-        "tools_upload_flavor": "linux",
-        <%- else -%>
-        "guest_os_type": "Debian_64",
-        <%- end -%>
-        "headless": true,
 
-        "iso_url": "http://cdimage.debian.org/debian-cd/7.2.0/amd64/iso-cd/debian-7.2.0-amd64-netinst.iso",
-        "iso_checksum": "b86774fe4de88be6378ba3d71b8029bd",
-        "iso_checksum_type": "md5",
+    "builders": [
+        {
+            "name": "wheezy64-<%= @type %>",
+            "type": "<%= @target %>",
+            <%- if @target == "vmware" -%>
+            "guest_os_type": "debian7-64",
+            "tools_upload_flavor": "linux",
+            <%- else -%>
+            "guest_os_type": "Debian_64",
+            <%- end -%>
+            "headless": true,
 
-        "ssh_username": "vagrant",
-        "ssh_password": "vagrant",
+            "iso_url": "http://cdimage.debian.org/debian-cd/7.2.0/amd64/iso-cd/debian-7.2.0-amd64-netinst.iso",
+            "iso_checksum": "b86774fe4de88be6378ba3d71b8029bd",
+            "iso_checksum_type": "md5",
 
-        "http_directory": "debian",
+            "ssh_username": "vagrant",
+            "ssh_password": "vagrant",
 
-        "boot_command": [
-            "<esc><wait>",
-            "install ",
-            "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
-            "debian-installer=en_US auto=true locale=en_US kbd-chooser/method=us ",
-            "netcfg/get_hostname={{ .Name }} ",
-            "netcfg/get_domain=vagrantup.com ",
-            "fb=false debconf/frontend=noninteractive ",
-            "console-setup/ask_detect=false console-keymaps-at/keymap=us ",
-            "keyboard-configuration/xkb-keymap=us ",
-            "<enter>"
-        ],
+            "http_directory": "debian",
 
-        "shutdown_command": "echo 'shutdown -h now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'"
-    }],
+            "boot_command": [
+                "<esc><wait>",
+                "install ",
+                "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+                "debian-installer=en_US auto=true locale=en_US kbd-chooser/method=us ",
+                "netcfg/get_hostname={{ .Name }} ",
+                "netcfg/get_domain=vagrantup.com ",
+                "fb=false debconf/frontend=noninteractive ",
+                "console-setup/ask_detect=false console-keymaps-at/keymap=us ",
+                "keyboard-configuration/xkb-keymap=us ",
+                "<enter>"
+            ],
+
+            "shutdown_command": "echo 'shutdown -h now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'"
+        }
+    ],
+    
     "post-processors": [
         {
             "type": "vagrant"
