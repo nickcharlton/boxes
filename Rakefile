@@ -5,7 +5,7 @@ require 'erb'
 
 @distros = [:debian, :ubuntu]
 @targets = [:virtualbox, :vmware]
-@types = [:standard, :chef, :puppet]
+@types = [:standard, :chef, :puppet, :ansible]
 
 namespace :build do
   @distros.each do |distro|
