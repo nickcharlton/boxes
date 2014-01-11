@@ -16,40 +16,44 @@
             "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
         }
     ],
-    "builders": [{
-        "name": "raring64-<%= @type %>",
-        "type": "<%= @target %>",
-        <%- if @target == "vmware" -%>
-        "guest_os_type": "ubuntu-64",
-        "tools_upload_flavor": "linux",
-        <%- else -%>
-        "guest_os_type": "Ubuntu_64",
-        <%- end -%>
-        "headless": true,
 
-        "iso_url": "http://releases.ubuntu.com/13.04/ubuntu-13.04-server-amd64.iso",
-        "iso_checksum": "7d335ca541fc4945b674459cde7bffb9",
-        "iso_checksum_type": "md5",
+    "builders": [
+        {
+            "name": "raring64-<%= @type %>",
+            "type": "<%= @target %>",
+            <%- if @target == "vmware" -%>
+            "guest_os_type": "ubuntu-64",
+            "tools_upload_flavor": "linux",
+            <%- else -%>
+            "guest_os_type": "Ubuntu_64",
+            <%- end -%>
+            "headless": true,
 
-        "ssh_username": "vagrant",
-        "ssh_password": "vagrant",
+            "iso_url": "http://releases.ubuntu.com/13.04/ubuntu-13.04-server-amd64.iso",
+            "iso_checksum": "7d335ca541fc4945b674459cde7bffb9",
+            "iso_checksum_type": "md5",
 
-        "http_directory": "ubuntu",
+            "ssh_username": "vagrant",
+            "ssh_password": "vagrant",
 
-        "boot_command": [
-            "<esc><esc><enter><wait>",
-            "/install/vmlinuz noapic ",
-            "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
-            "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
-            "hostname={{ .Name }} ",
-            "fb=false debconf/frontend=noninteractive ",
-            "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
-            "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
-            "initrd=/install/initrd.gz -- <enter>"
-        ],
+            "http_directory": "ubuntu",
 
-        "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'"
-    }],
+            "boot_command": [
+                "<esc><esc><enter><wait>",
+                "/install/vmlinuz noapic ",
+                "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+                "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+                "hostname={{ .Name }} ",
+                "fb=false debconf/frontend=noninteractive ",
+                "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+                "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+                "initrd=/install/initrd.gz -- <enter>"
+            ],
+
+            "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'"
+        }
+    ],
+    
     "post-processors": [
         {
             "type": "vagrant"
