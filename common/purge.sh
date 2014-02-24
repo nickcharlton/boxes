@@ -41,13 +41,13 @@ rm -f /EMPTY
 
 # whiteout root
 echo "Cleaning up /..."
-count=`df --sync -kP / | tail -n1  | awk -F ' ' '{print $4}'`; 
+#count=`df --sync -kP / | tail -n1  | awk -F ' ' '{print $4}'`; 
 dd if=/dev/zero of=/tmp/whitespace bs=1024;
 rm /tmp/whitespace;
   
 # whiteout /boot
 echo "Cleaning up /boot..."
-count=`df --sync -kP /boot | tail -n1 | awk -F ' ' '{print $4}'`;
+#count=`df --sync -kP /boot | tail -n1 | awk -F ' ' '{print $4}'`;
 dd if=/dev/zero of=/boot/whitespace bs=1024;
 rm /boot/whitespace;
 
