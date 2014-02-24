@@ -19,7 +19,12 @@ namespace :build do
           desc "Build #{name}"
           task name do
             @type = type
-            @target = target
+            @builder =
+              if target == 'virtualbox'
+                'virtualbox-iso'
+              else
+                target
+              end
 
             packer_template = ERB.new(template, nil, '-')
             

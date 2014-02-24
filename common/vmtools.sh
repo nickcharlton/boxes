@@ -5,7 +5,7 @@
 ##
 
 case $PACKER_BUILDER_TYPE in
-    'virtualbox')
+    'virtualbox-iso')
         echo "Installing VirtualBox Guest Additions..."
         apt-get -qy install dkms
         mount -o loop /home/vagrant/VBoxGuestAdditions.iso /mnt

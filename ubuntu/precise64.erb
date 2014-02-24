@@ -20,8 +20,8 @@
     "builders": [
         {
             "name": "precise64-<%= @type %>",
-            "type": "<%= @target %>",
-            <%- if @target == "vmware" -%>
+            "type": "<%= @builder %>",
+            <%- if @builder == "vmware" -%>
             "guest_os_type": "ubuntu-64",
             "tools_upload_flavor": "linux",
             <%- else -%>
