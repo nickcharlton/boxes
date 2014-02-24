@@ -3,9 +3,9 @@
 require 'fileutils'
 require 'erb'
 
-@distros = [:debian, :ubuntu]
-@targets = [:virtualbox, :vmware]
-@types = [:standard, :chef, :puppet]
+@distros = %w{debian ubuntu}
+@targets = %w{virtualbox vmware}
+@types = %w{standard chef puppet}
 
 namespace :build do
   @distros.each do |distro|
@@ -18,11 +18,8 @@ namespace :build do
           name = "#{template_name}-#{type}-#{target}"
           desc "Build #{name}"
           task name do
-            # this is a fix for a scope issue, we can't access
-            # template_name, type or target from above
-            attribs = name.split('-')
-            @type = attribs[1]
-            @target = attribs[2]
+            @type = type
+            @target = target
 
             packer_template = ERB.new(template, nil, '-')
             
@@ -38,7 +35,7 @@ namespace :build do
             result = system "packer build tmp/#{name}.json"
             
             if result
-              output_name = "packer_#{attribs[0]}-#{@type}_#{@target}.box" 
+              output_name = "packer_#{template_name}-#{type}_#{target}.box"
               FileUtils.mv(output_name, "#{name}.box")
             end
 
