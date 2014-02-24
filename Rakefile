@@ -59,6 +59,7 @@ desc 'Clean up any temporary directories and files'
 task :clean do
   FileUtils.rm_rf('tmp')
   FileUtils.rm_rf('packer_cache')
+  FileUtils.rm_rf Dir.glob('*.log')
 end
 
 desc 'Build all of the configurations'
