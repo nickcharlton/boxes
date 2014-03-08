@@ -20,7 +20,7 @@
         {
             "name": "wheezy64-<%= @type %>",
             "type": "<%= @builder %>",
-            <%- if @builder == "vmware" -%>
+            <%- if @builder == "vmware-iso" -%>
             "guest_os_type": "debian7-64",
             "tools_upload_flavor": "linux",
             <%- else -%>
