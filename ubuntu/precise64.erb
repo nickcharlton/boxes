@@ -21,7 +21,7 @@
         {
             "name": "precise64-<%= @type %>",
             "type": "<%= @builder %>",
-            <%- if @builder == "vmware" -%>
+            <%- if @builder == "vmware-iso" -%>
             "guest_os_type": "ubuntu-64",
             "tools_upload_flavor": "linux",
             <%- else -%>
