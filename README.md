@@ -7,7 +7,7 @@ keep the boxes you use with Vagrant updated.
 ## Requirements
 
 * ruby / rake
-* Packer >= v0.3.4
+* Packer >= v0.5.0
 
 You will also need VirtualBox and/or VMware Fusion/Workstation compatible with 
 Packer (and, in the case of VMware Fusion, ensured that the virtual machine tools
