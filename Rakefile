@@ -22,6 +22,8 @@ namespace :build do
             @builder =
               if target == 'virtualbox'
                 'virtualbox-iso'
+              elsif target == 'vmware'
+                'vmware-iso'
               else
                 target
               end
