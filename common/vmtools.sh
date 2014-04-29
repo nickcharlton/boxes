@@ -14,7 +14,7 @@ case $PACKER_BUILDER_TYPE in
         
         rm -f /home/vagrant/VBoxGuestAdditions.iso
     ;;
-    'vmware')
+    'vmware-iso')
         echo "Installing VMware Tools..."
         mkdir -p /mnt/cdrom
         mount -o loop /home/vagrant/linux.iso /mnt/cdrom
