@@ -2,9 +2,12 @@
 
 # see: http://docs.puppetlabs.com/guides/puppetlabs_package_repositories.html
 
+# determine the os release
+os_release=$(lsb_release -c | cut -d ":" -f2 | sed -e "s/^[ \t]*//")
+
 # configure the puppet package sources
-wget http://apt.puppetlabs.com/puppetlabs-release-precise.deb
-dpkg -i puppetlabs-release-precise.deb
+wget http://apt.puppetlabs.com/puppetlabs-release-$os_release.deb
+dpkg -i puppetlabs-release-$os_release.deb
 apt-get -q update
 
 # install puppet
