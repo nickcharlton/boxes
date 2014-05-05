@@ -3,7 +3,7 @@
 # see: http://docs.puppetlabs.com/guides/puppetlabs_package_repositories.html
 
 # determine the os release
-os_release=$(lsb_release -c | cut -d ":" -f2 | sed -e "s/^[ \t]*//")
+os_release=$(lsb_release -cs)
 
 # configure the puppet package sources
 wget http://apt.puppetlabs.com/puppetlabs-release-$os_release.deb
