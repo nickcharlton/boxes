@@ -1,0 +1,62 @@
+{
+    "provisioners": [
+        {
+            "type": "shell",
+            "scripts": [
+                "common/postinstall.sh",
+                "common/vmtools.sh",
+                <%- if @type == "standard" -%>
+                "common/chef.sh",
+                "common/puppet.sh",
+                <%- else -%>
+                "common/<%= @type %>.sh",
+                <%- end -%>
+                "common/purge.sh"
+            ],
+            "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
+        }
+    ],
+    "builders": [
+        {
+            "name": "squeeze64-<%= @type %>",
+            "type": "<%= @builder %>",
+            <%- if @builder == "vmware-iso" -%>
+            "guest_os_type": "debian6-64",
+            "tools_upload_flavor": "linux",
+            <%- else -%>
+            "guest_os_type": "Debian_64",
+            <%- end -%>
+            "headless": true,
+
+            "iso_url": "http://cdimage.debian.org/mirror/cdimage/archive/6.0.9/amd64/iso-cd/debian-6.0.9-amd64-netinst.iso",
+            "iso_checksum": "9b08117cc235f3084948ab75a0f48861",
+            "iso_checksum_type": "md5",
+
+            "ssh_username": "vagrant",
+            "ssh_password": "vagrant",
+
+            "http_directory": "debian",
+
+            "boot_command": [
+                "<esc><wait>",
+                "install ",
+                "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+                "debian-installer=en_US auto=true locale=en_US kbd-chooser/method=us ",
+                "netcfg/get_hostname={{ .Name }} ",
+                "netcfg/get_domain=vagrantup.com ",
+                "fb=false debconf/frontend=noninteractive ",
+                "console-setup/ask_detect=false console-keymaps-at/keymap=us ",
+                "keyboard-configuration/xkb-keymap=us ",
+                "<enter>"
+            ],
+
+            "shutdown_command": "echo 'shutdown -h now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'"
+        }
+    ],
+
+    "post-processors": [
+        {
+            "type": "vagrant"
+        }
+    ]
+}
