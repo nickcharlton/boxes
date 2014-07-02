@@ -15,9 +15,8 @@ apt-get -qy install curl
 
 # configure password-less sudo
 usermod -a -G sudo vagrant
-echo "%vagrant ALL=NOPASSWD:ALL" > /tmp/vagrant
-mv /tmp/vagrant /etc/sudoers.d/vagrant
-chmod 0440 /etc/sudoers.d/vagrant
+sed -i -e '/Defaults\s\+env_reset/a Defaults\texempt_group=admin' /etc/sudoers
+sed -i -e 's/%admin ALL=(ALL) ALL/%admin ALL=NOPASSWD:ALL/g' /etc/sudoers
 
 # install the vagrant-provided ssh keys
 mkdir -pm 700 /home/vagrant/.ssh
