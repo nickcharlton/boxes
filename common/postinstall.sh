@@ -10,7 +10,27 @@ apt-get -qy upgrade
 # install some oft used packages
 apt-get -qy install linux-headers-$(uname -r) build-essential
 apt-get -qy install zlib1g-dev libssl-dev
-apt-get -qy install ruby1.9.3
+
+case $(lsb_release -cs) in
+    'lucid')
+        apt-get -qy install ruby-full
+
+        # manually install a mucher newer version of rubygems
+        curl -O http://production.cf.rubygems.org/rubygems/rubygems-2.3.0.tgz
+        tar -xf rubygems-2.3.0.tgz
+        cd rubygems-2.3.0/
+        ruby setup.rb --no-ri --no-rdoc --no-format-executable
+        cd ../
+
+        # and then update rdoc (force ensures the executable is overwritten)
+        gem install rdoc -v 4.1.1 -no-ri --no-rdoc --force
+        gem install rdoc-data; rdoc-data --install
+    ;;
+    *)
+        apt-get -qy install ruby1.9.3
+    ;;
+esac
+
 apt-get -qy install curl
 
 # configure password-less sudo
