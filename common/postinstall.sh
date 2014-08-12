@@ -31,8 +31,6 @@ case $(lsb_release -cs) in
     ;;
 esac
 
-apt-get -qy install curl
-
 # configure password-less sudo
 usermod -a -G sudo vagrant
 sed -i -e '/Defaults\s\+env_reset/a Defaults\texempt_group=admin' /etc/sudoers
