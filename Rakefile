@@ -5,7 +5,7 @@ require 'erb'
 
 @distros = %w{debian ubuntu}
 @targets = %w{virtualbox vmware}
-@types = %w{standard chef puppet}
+@types = %w{standard chef puppet ansible}
 
 namespace :build do
   @distros.each do |distro|
@@ -29,7 +29,7 @@ namespace :build do
               end
 
             packer_template = ERB.new(template, nil, '-')
-            
+
             # ensure tmp/ exists
             FileUtils.mkdir_p('tmp')
 
@@ -40,7 +40,7 @@ namespace :build do
 
             # run packer
             result = system "packer build tmp/#{name}.json"
-            
+
             if result
               output_name = "packer_#{template_name}-#{type}_#{target}.box"
               FileUtils.mv(output_name, "#{name}.box")
