@@ -6,13 +6,13 @@
 #source ./hacking/env-setup
 
 # PIP installer
-sudo easy_install pip
-sudo pip install ansible
+#sudo easy_install pip
+#sudo pip install ansible
 
 # RPM installer
 #sudo yum install ansible
 
 # Apt installer
-#sudo add-apt-repository ppa:rquillo/ansible
-#sudo apt-get update
-#sudo apt-get install ansible
+apt-add-repository ppa:ansible/ansible
+apt-get -qy update
+apt-get -qy install ansible
