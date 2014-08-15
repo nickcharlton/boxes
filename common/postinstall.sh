@@ -32,7 +32,9 @@ case $(lsb_release -cs) in
 esac
 
 # configure password-less sudo
+groupadd admin
 usermod -a -G sudo vagrant
+usermod -a -G admin vagrant
 sed -i -e '/Defaults\s\+env_reset/a Defaults\texempt_group=admin' /etc/sudoers
 sed -i -e 's/%admin ALL=(ALL) ALL/%admin ALL=NOPASSWD:ALL/g' /etc/sudoers
 
