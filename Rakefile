@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 require 'fileutils'
-require 'erb'
+require_relative 'lib/boxes'
 
 @distros = %w{debian ubuntu}
 @targets = %w{virtualbox vmware}
@@ -18,36 +18,12 @@ namespace :build do
           name = "#{template_name}-#{type}-#{target}"
           desc "Build #{name}"
           task name do
-            @type = type
-            @builder =
-              if target == 'virtualbox'
-                'virtualbox-iso'
-              elsif target == 'vmware'
-                'vmware-iso'
-              else
-                target
-              end
+            box = Boxes::Builder.new(template_name, type, target)
+            result = box.build(template)
 
-            packer_template = ERB.new(template, nil, '-')
-            
-            # ensure tmp/ exists
-            FileUtils.mkdir_p('tmp')
-
-            # write the template to tmp
-            File.open("tmp/#{name}.json", 'w') do |f|
-              f.puts packer_template.result
-            end
-
-            # run packer
-            result = system "packer build tmp/#{name}.json"
-            
             if result
-              output_name = "packer_#{template_name}-#{type}_#{target}.box"
-              FileUtils.mv(output_name, "#{name}.box")
+              box.clean
             end
-
-            # clean up
-            FileUtils.rm("tmp/#{name}.json")
           end
 
           task :default => name
