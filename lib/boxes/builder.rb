@@ -19,8 +19,9 @@ module Boxes
     # Build the given template.
     #
     # @param template [String] the template to build the box with.
+    # @param output_file [String] the filename to output as.
     # @return [Boolean] the status of the build process.
-    def build(template)
+    def build(template, output_name="packer_#{@name}-#{@type}_#{@target}.box")
       name = "#{@name}-#{@type}-#{@target}"
 
       @builder = # should be a getter
@@ -48,7 +49,6 @@ module Boxes
       result = system "packer build tmp/#{name}.json"
 
       if result
-        output_name = "packer_#{@name}-#{@type}_#{@target}.box"
         FileUtils.mv(output_name, "#{name}.box")
       end
 
