@@ -5,16 +5,18 @@ require_relative 'lib/boxes'
 
 @distros = %w{debian ubuntu}
 @targets = %w{virtualbox vmware}
-@types = %w{standard chef puppet}
+@standard_types = %w{standard chef puppet}
+@special_types = [{name: 'ruby-box', template: 'ubuntu/trusty64.erb', script: 'ruby'}]
 
 namespace :build do
+  # standard box types
   @distros.each do |distro|
     FileList["#{distro}/*.erb"].each do |template_path|
       template = IO.read(template_path)
       template_name = template_path.gsub(/#{distro}\/|\.erb\z/, '')
 
       @targets.each do |target|
-        @types.each do |type|
+        @standard_types.each do |type|
           name = "#{template_name}-#{type}-#{target}"
           desc "Build #{name}"
           task name do
@@ -29,6 +31,27 @@ namespace :build do
           task :default => name
         end
       end
+    end
+  end
+
+  # special box types
+  @special_types.each do |type|
+    name = type[:name]
+    template = IO.read(type[:template])
+    template_name = /([a-z0-9]*?)(?=\.erb)/.match(type[:template])
+
+    @targets.each do |target|
+    desc "Build #{name}-#{target}"
+      task "#{name}-#{target}" do
+        box = Boxes::Builder.new(template_name, type[:script], target)
+        result = box.build(template)
+
+        if result
+          box.clean
+        end
+      end
+
+      task :default => "#{name}-#{target}"
     end
   end
 end
