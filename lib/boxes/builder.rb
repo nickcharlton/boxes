@@ -2,6 +2,7 @@ require 'fileutils'
 require_relative 'utils/template'
 
 module Boxes
+  # Class which drives the build process.
   class Builder
     attr_accessor :name, :target, :type
 
@@ -21,7 +22,10 @@ module Boxes
     # @param template [String] the template to build the box with.
     # @param output_file [String] the filename to output as.
     # @return [Boolean] the status of the build process.
-    def build(template, output_name="packer_#{@name}-#{@type}_#{@target}.box")
+    # rubocop:disable Metrics/MethodLength
+    def build(template,
+              output_name = "packer_#{@name}-#{@type}_#{@target}.box")
+      # rubocop:enable Metrics/MethodLength
       name = "#{@name}-#{@type}-#{@target}"
 
       @builder = # should be a getter
@@ -34,7 +38,7 @@ module Boxes
         end
 
       # render the ERB template (in it's own context)
-      hash =  {:name => @name, :type => @type, :builder => @builder}
+      hash =  { name: @name, type: @type, builder: @builder }
       packer_template = Boxes::Utils::Template.render(template, hash)
 
       # ensure tmp/ exists
@@ -48,9 +52,7 @@ module Boxes
       # run packer
       result = system "packer build tmp/#{name}.json"
 
-      if result
-        FileUtils.mv(output_name, "#{name}.box")
-      end
+      FileUtils.mv(output_name, "#{name}.box") if result
 
       result
     end

@@ -1,5 +1,5 @@
 require_relative 'boxes/version'
 require_relative 'boxes/builder'
 
-module Boxes
-end
+# A collection of helpers which provides the boxes functionality.
+module Boxes; end

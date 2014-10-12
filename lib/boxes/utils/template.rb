@@ -28,9 +28,11 @@ module Boxes
         end
 
         # The binding which is passed to ERB.
+        # rubocop:disable Style/AccessorMethodName
         def get_binding
           binding
         end
+        # rubocop:enable Style/AccessorMethodName
       end
     end
   end

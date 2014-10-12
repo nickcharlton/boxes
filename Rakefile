@@ -3,10 +3,12 @@
 require 'fileutils'
 require_relative 'lib/boxes'
 
-@distros = %w{debian ubuntu}
-@targets = %w{virtualbox vmware}
-@standard_types = %w{standard chef puppet}
-@special_types = [{name: 'ruby-box', template: 'ubuntu/trusty64.erb', script: 'ruby'}]
+@distros = %w(debian ubuntu)
+@targets = %w(virtualbox vmware)
+@standard_types = %w(standard chef puppet)
+@special_types = [
+  { name: 'ruby-box', template: 'ubuntu/trusty64.erb', script: 'ruby' }
+]
 
 namespace :build do
   # standard box types
@@ -23,12 +25,10 @@ namespace :build do
             box = Boxes::Builder.new(template_name, type, target)
             result = box.build(template)
 
-            if result
-              box.clean
-            end
+            box.clean if result
           end
 
-          task :default => name
+          task default: name
         end
       end
     end
@@ -41,17 +41,15 @@ namespace :build do
     template_name = /([a-z0-9]*?)(?=\.erb)/.match(type[:template])
 
     @targets.each do |target|
-    desc "Build #{name}-#{target}"
+      desc "Build #{name}-#{target}"
       task "#{name}-#{target}" do
         box = Boxes::Builder.new(template_name, type[:script], target)
         result = box.build(template)
 
-        if result
-          box.clean
-        end
+        box.clean if result
       end
 
-      task :default => "#{name}-#{target}"
+      task default: "#{name}-#{target}"
     end
   end
 end
@@ -64,4 +62,4 @@ task :clean do
 end
 
 desc 'Build all of the configurations'
-task :default => 'build:default'
+task default: 'build:default'
