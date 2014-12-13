@@ -1,4 +1,4 @@
 # Versions and other declarations.
 module Boxes
-  VERSION = '2.0.0pre'
+  VERSION = '1.5.0'
 end
