@@ -10,6 +10,7 @@ apt-get -qy upgrade
 # install some oft used packages
 apt-get -qy install linux-headers-$(uname -r) build-essential
 apt-get -qy install zlib1g-dev libssl-dev
+apt-get -qy install python-software-properties python-setuptools python-dev
 
 case $(lsb_release -cs) in
     'lucid')

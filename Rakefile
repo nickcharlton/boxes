@@ -5,7 +5,7 @@ require_relative 'lib/boxes'
 
 @distros = %w(debian ubuntu)
 @targets = %w(virtualbox vmware)
-@standard_types = %w(standard chef puppet)
+@standard_types = %w(standard chef puppet ansible)
 @special_types = [
   { name: 'ruby-box', template: 'ubuntu/trusty64.erb', script: 'ruby' }
 ]
