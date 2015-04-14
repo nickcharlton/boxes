@@ -29,5 +29,6 @@ ruby-install ruby 2.0.0 -p https://gist.github.com/nickcharlton/e6af8791fda26e24
 ruby-install ruby 2.1.5
 ruby-install ruby 2.2.0
 ruby-install ruby 2.2.1
+ruby-install ruby 2.2.2
 
 exit
