@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # this installs chruby, ruby-install and a selection of rubies and is used in
 # the 'ruby' special box type.
 
