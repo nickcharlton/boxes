@@ -3,8 +3,8 @@
 # this installs chruby, ruby-install and a selection of rubies and is used in
 # the 'ruby' special box type.
 
-chruby_version=0.3.8
-rubyinstall_version=0.4.3
+chruby_version=0.3.9
+rubyinstall_version=0.5.0
 
 # install chruby
 wget -O chruby-$chruby_version.tar.gz https://github.com/postmodern/chruby/archive/v$chruby_version.tar.gz
