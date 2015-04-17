@@ -33,4 +33,10 @@ ruby-install ruby 2.2.0
 ruby-install ruby 2.2.1
 ruby-install ruby 2.2.2
 
+# update gems and install bundler
+source /usr/local/share/chruby/chruby.sh
+for ruby in `chruby`; do
+    chruby-exec $ruby -- gem install bundler
+done
+
 exit
