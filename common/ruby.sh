@@ -27,7 +27,6 @@ cd ruby-install-$rubyinstall_version/
 make install
 
 # install a set of recent MRI Rubies.
-ruby-install ruby 2.0.0 -p https://gist.github.com/nickcharlton/e6af8791fda26e24ae8f.txt
 ruby-install ruby 2.1.5
 ruby-install ruby 2.2.0
 ruby-install ruby 2.2.1
