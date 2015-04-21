@@ -4,6 +4,16 @@
 date > /etc/vagrant_box_build_time
 
 # update the apt cache and packages
+case $(lsb_release -cs) in
+    'precise')
+        apt-get clean
+        rm -rf /var/lib/apt/lists/*
+        apt-get clean
+    ;;
+    *)
+    ;;
+esac
+
 apt-get -qy update
 apt-get -qy upgrade
 
