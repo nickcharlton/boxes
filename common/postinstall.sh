@@ -4,6 +4,8 @@
 date > /etc/vagrant_box_build_time
 
 # update the apt cache and packages
+# this fixes an issue where the hashes are mismatched.
+rm -R /var/lib/apt/lists/*
 apt-get -qy update
 apt-get -qy upgrade
 
