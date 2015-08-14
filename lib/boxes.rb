@@ -1,5 +1,8 @@
-require_relative 'boxes/version'
-require_relative 'boxes/builder'
+require 'boxes/version'
+require 'boxes/utils/template'
+require 'boxes/builder'
+require 'boxes/command'
 
-# A collection of helpers which provides the boxes functionality.
-module Boxes; end
+# Toolkit for building Vagrantboxes, VM and cloud images.
+module Boxes
+end

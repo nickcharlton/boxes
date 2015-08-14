@@ -1,5 +1,4 @@
 require 'fileutils'
-require_relative 'utils/template'
 
 module Boxes
   # Class which drives the build process.

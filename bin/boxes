@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'boxes'
+
+Boxes::Command.run(ARGV)
