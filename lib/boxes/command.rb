@@ -6,6 +6,7 @@ module Boxes
   class Command < CLAide::Command
     self.abstract_command = true
     self.command = 'boxes'
+    self.version = VERSION
     self.description = 'Toolkit for building Vagrantboxes, VM and cloud images.'
   end
 end
