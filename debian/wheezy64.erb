@@ -13,7 +13,7 @@
                 <%- end -%>
                 "common/purge.sh"
             ],
-            "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
+            "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'"
         }
     ],
     "builders": [
