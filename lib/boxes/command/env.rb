@@ -33,6 +33,18 @@ module Boxes
           end
         end
       end
+
+      # Tidies up the working environment
+      class Clean < Env
+        self.summary = 'Clean up the environment.'
+        self.description = 'Removes any files from the working directory.'
+
+        def run
+          working_dir = Boxes.config.working_dir
+
+          FileUtils.rm_rf(working_dir) if working_dir.exist?
+        end
+      end
     end
   end
 end
