@@ -1,6 +1,7 @@
 require 'boxes/version'
 require 'boxes/config'
 require 'boxes/utils/template'
+require 'boxes/environment'
 require 'boxes/builder'
 require 'boxes/command'
 
