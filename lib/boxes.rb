@@ -1,8 +1,8 @@
 require 'boxes/version'
 require 'boxes/errors'
 require 'boxes/config'
-require 'boxes/utils/template'
 require 'boxes/environment'
+require 'boxes/template'
 require 'boxes/builder'
 require 'boxes/command'
 

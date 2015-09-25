@@ -3,5 +3,8 @@ module Boxes
   module Errors
     # Base error class for all other errors.
     class BoxesError < StandardError; end
+
+    # Raised when a template is missing.
+    class TemplateNotFoundError < BoxesError; end
   end
 end
