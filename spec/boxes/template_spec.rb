@@ -34,6 +34,12 @@ describe Boxes::Template do
         described_class.new(env, 'nope/nope')
       end.to raise_error(Boxes::Errors::TemplateNotFoundError)
     end
+
+    it 'stores the template name' do
+      template = described_class.new(env, 'ubuntu/trusty64')
+
+      expect(template.name).to eq 'ubuntu/trusty64'
+    end
   end
 
   describe '#render' do

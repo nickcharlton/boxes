@@ -3,7 +3,7 @@ module Boxes
   class Template
     include Boxes::Errors
 
-    attr_reader :template
+    attr_reader :name, :template
 
     # Load a template with a given name.
     #
@@ -14,6 +14,7 @@ module Boxes
     def initialize(env, name)
       fail(TemplateNotFoundError) unless env.available_templates.include?(name)
 
+      @name = name
       @template = ''
       File.open(Boxes.config.working_dir + "templates/#{name}.erb") do |f|
         @template << f.read
