@@ -1,17 +1,25 @@
 module Boxes
   # Class which drives the build process.
   class Builder
-    attr_accessor :name, :target, :type
+    include Boxes::Errors
 
-    # Initialise a new boxes build.
+    attr_accessor :template, :scripts
+
+    # Initialise a new build.
     #
-    # @param name [String] the name of the box.
-    # @param type [String] the type of box to build.
-    # @param target [String] the target (e.g.: vmware) to build against.
-    def initialize(name, type, target)
-      @name = name
-      @type = type
-      @target = target
+    # @param env [Boxes::Environment] environment to operate in.
+    # @param args [Hash]
+    # @param template [String] the name of the template.
+    # @param scripts [Array] scripts to include in the build.
+    def initialize(env, args)
+      template = args[:template] || fail(MissingArgumentError,
+                                         'The template must be specified.')
+      scripts = args.fetch(:scripts, [])
+
+      @template = Template.new(env, template)
+      @scripts = scripts.collect do |c|
+        env.available_scripts.include?(c) ? c : fail(ScriptNotFoundError)
+      end
     end
 
     # Build the given template.
