@@ -6,5 +6,11 @@ module Boxes
 
     # Raised when a template is missing.
     class TemplateNotFoundError < BoxesError; end
+
+    # Raised when a script is missing.
+    class ScriptNotFoundError < BoxesError; end
+
+    # Raised when an expected argument is missing.
+    class MissingArgumentError < BoxesError; end
   end
 end
