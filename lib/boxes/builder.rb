@@ -1,5 +1,3 @@
-require 'fileutils'
-
 module Boxes
   # Class which drives the build process.
   class Builder

@@ -1,6 +1,3 @@
-require 'claide'
-require 'colored'
-
 module Boxes
   # Class which encapsulates the command line handling.
   class Command < CLAide::Command

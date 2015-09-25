@@ -1,3 +1,10 @@
+require 'fileutils'
+require 'pathname'
+require 'yaml'
+
+require 'claide'
+require 'colored'
+
 require 'boxes/version'
 require 'boxes/errors'
 require 'boxes/config'

@@ -1,6 +1,3 @@
-require 'pathname'
-require 'yaml'
-
 module Boxes
   # Stores the configuration for Boxes.
   class Config
