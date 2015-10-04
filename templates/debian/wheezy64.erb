@@ -3,24 +3,21 @@
         {
             "type": "shell",
             "scripts": [
-                "common/postinstall.sh",
-                "common/vmtools.sh",
-                <%- if @type == "standard" -%>
-                "common/chef.sh",
-                "common/puppet.sh",
-                <%- else -%>
-                "common/<%= @type %>.sh",
+                "scripts/postinstall.sh",
+                "scripts/vmtools.sh",
+                <%- @scripts.each do |script| -%>
+                "scripts/<%= script %>",
                 <%- end -%>
-                "common/purge.sh"
+                "scripts/purge.sh"
             ],
             "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'"
         }
     ],
     "builders": [
         {
-            "name": "wheezy64-<%= @type %>",
-            "type": "<%= @builder %>",
-            <%- if @builder == "vmware-iso" -%>
+            "name": "<%= @name %>",
+            "type": "<%= @provider %>-iso",
+            <%- if @provider == "vmware" -%>
             "guest_os_type": "debian7-64",
             "tools_upload_flavor": "linux",
             <%- else -%>
