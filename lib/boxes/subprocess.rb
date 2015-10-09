@@ -19,8 +19,7 @@ module Boxes
         # read each stream from a new thread
         { out: stdout, err: stderr }.each do |key, stream|
           Thread.new do
-            line = stream.gets
-            while line
+            stream.each_line do |line|
               # yield the block depending on the stream
               if key == :out
                 yield line, nil, thread if block_given?

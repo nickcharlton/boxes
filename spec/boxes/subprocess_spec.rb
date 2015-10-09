@@ -10,15 +10,21 @@ describe Boxes::Subprocess do
   end
 
   it 'runs a command and returns stdout' do
+    total_stdout = ''
     Boxes::Subprocess.run(command) do |stdout, _stderr, _thread|
-      expect(stdout).to eq 'A happy output.'
+      total_stdout << stdout
     end
+
+    expect(total_stdout).to eq "A happy output.\n"
   end
 
   it 'runs a command and returns stderr' do
+    total_stderr = ''
     Boxes::Subprocess.run(command) do |_stdout, stderr, _thread|
-      expect(stderr).to eq 'An unhappy output.'
+      total_stderr << stderr
     end
+
+    expect(total_stderr).to eq "An unhappy output.\n"
   end
 
   it 'returns a status code' do
