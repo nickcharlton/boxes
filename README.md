@@ -1,53 +1,51 @@
 # boxes
 
-A collection of templates for generating some Vagrant base boxes. The idea is that 
-it should be easy to automate rebuilding these (in all of the formats you need) to
-keep the boxes you use with Vagrant updated.
+[boxes][] takes the complexity out of building custom [Vagrant][] boxes.
 
-## Requirements
+It's a command line tool which provides a set of templates and scripts to
+combine as you need. There are also a set of pre-build boxes which are
+regenerated regularly.
 
-* ruby / rake
-* Packer >= v0.5.0
+## Installation & Requirements
 
-You will also need VirtualBox and/or VMware Fusion/Workstation compatible with 
-Packer (and, in the case of VMware Fusion, ensured that the virtual machine tools
-are downloaded and available).
+```shell
+[sudo] gem install boxes
+```
+
+boxes leans on [Packer][] and [VirtualBox][], [VMware Fusion][fusion] or
+[VMware Workstation][workstation] for building boxes and these will need to
+available in your `$PATH`.
 
 ## Usage
 
-This uses [rake][] and [embedded Ruby templates][erb] to assemble the templates
-Packer expects and help with automation. This allows us to programatically create
-many templates with small alterations (e.g.: with or without Chef), without defining
-lots of Packer source templates.
+boxes is driven by the `boxes` command line tool, and works with artifacts
+inside it's own working directory. You need to specify a name for the build,
+a template to work with and the output provider. Something like so:
 
-```bash
-$ rake -T
-rake default    # Build all of the boxes in all configurations.
-rake clean      # Tidy up.
-
-rake build:precise64-standard-virtualbox
-rake build:precise64-chef-virtualbox
-rake build:wheezy64-standard-virtualbox
-rake build:wheezy64-chef-virtualbox
-<snip>
+```shell
+boxes build --name=trusty64-empty --template=ubuntu/trusty64 --provider=vmware
 ```
 
-`standard` aims to follow the pattern followed by the default Vagrantboxes (both
-Puppet and Chef), using the recommended installation method for each.
+This will build a file called `trusty64-empty.box` in the current directory.
 
-With a reasonably fast internet connection and SSD, the time taken to build each
-both is approximately 15-20 minutes. (Or about 2 hours for a complete set per 
-distro.)
+There's lots more to `boxes` than building simple empty Vagrant boxes like
+this, which can be see in the inline help.
 
-## Credits
+## Contributing
 
-Copyright (c) 2013 Nick Charlton. MIT licensed.
+1. Fork it ( https://github.com/nickcharlton/boxes/fork )
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
 
-This is inspired by the [GDS's boxes repo][gds], and would have been impossible
-without some of the scripts which accompany [VeeWee][].
+## Author
 
-[gds]: https://github.com/alphagov/boxes
-[VeeWee]: https://github.com/jedi4ever/veewee
-[rake]: http://rake.rubyforge.org
-[erb]: http://ruby-doc.org/stdlib-2.0.0/libdoc/erb/rdoc/ERB.html
+Copyright (c) 2013 Nick Charlton <nick@nickcharlton.net>
 
+[boxes]: http://boxes.io
+[Vagrant]: http://vagrantup.com
+[Packer]: https://packer.io
+[VirtualBox]: https://www.virtualbox.org
+[fusion]: https://www.vmware.com/products/fusion/features.html
+[workstation]: https://www.vmware.com/products/workstation/features.html
