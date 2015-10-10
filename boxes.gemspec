@@ -9,9 +9,16 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Nick Charlton']
   spec.email         = ['nick@nickcharlton.net']
 
-  spec.summary       = 'TODO.'
-  spec.description   = 'TODO.'
-  spec.homepage      = 'https://github.com/nickcharlton/atlas-ruby'
+  spec.summary       = 'A command line tool to take the complexity out of '\
+                       'building Vagrant boxes.'
+  spec.description   = <<-EOF
+    boxes takes the complexity out of building custom Vagrant boxes.
+
+    It's a command line tool which provides a set of templates and scripts to
+    combine as you need. There are also a set of pre-build boxes which are
+    regenerated regularly.'
+  EOF
+  spec.homepage      = 'https://github.com/nickcharlton/boxes'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($RS)
