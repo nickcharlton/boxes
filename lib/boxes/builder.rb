@@ -3,7 +3,7 @@ module Boxes
   class Builder
     include Boxes::Errors
 
-    attr_accessor :template, :scripts
+    attr_accessor :name, :template, :scripts, :provider
 
     # Initialise a new build.
     #
@@ -11,7 +11,11 @@ module Boxes
     # @param args [Hash]
     # @param template [String] the name of the template.
     # @param scripts [Array] scripts to include in the build.
-    def initialize(env, args)
+    def initialize(env, args) # rubocop:disable Metrics/MethodLength
+      @name = args[:name] || fail(MissingArgumentError,
+                                  'The name must be specified.')
+      @provider = args[:provider] || fail(MissingArgumentError,
+                                          'The provider must be specified.')
       template = args[:template] || fail(MissingArgumentError,
                                          'The template must be specified.')
       scripts = args.fetch(:scripts, [])
@@ -22,49 +26,36 @@ module Boxes
       end
     end
 
-    # Build the given template.
-    #
-    # @param template [String] the template to build the box with.
-    # @param output_file [String] the filename to output as.
-    # @return [Boolean] the status of the build process.
-    # rubocop:disable Metrics/MethodLength
-    def build(template,
-              output_name = "packer_#{@name}-#{@type}_#{@target}.box")
-      # rubocop:enable Metrics/MethodLength
-      name = "#{@name}-#{@type}-#{@target}"
+    # Run the build.
+    def run # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      # render the template
+      rendered_template = template.render(name: name,
+                                          provider: provider,
+                                          scripts: scripts)
 
-      @builder = # should be a getter
-        if target == 'virtualbox'
-          'virtualbox-iso'
-        elsif target == 'vmware'
-          'vmware-iso'
-        else
-          target
-        end
-
-      # render the ERB template (in it's own context)
-      hash =  { name: @name, type: @type, builder: @builder }
-      packer_template = Boxes::Utils::Template.render(template, hash)
-
-      # ensure tmp/ exists
-      FileUtils.mkdir_p('tmp')
-
-      # write the template to tmp
-      File.open("tmp/#{name}.json", 'w') do |f|
-        f.puts packer_template
+      # write the template to a file
+      File.open(Boxes.config.working_dir + "#{build_name}.json", 'w') do |f|
+        f.puts rendered_template
       end
 
-      # run packer
-      result = system "packer build tmp/#{name}.json"
-
-      FileUtils.mv(output_name, "#{name}.box") if result
-
-      result
+      # execute the packer command
+      FileUtils.chdir(Boxes.config.working_dir)
+      cmd = "packer build #{build_name}.json"
+      Subprocess.run(cmd) do |stdout, stderr, _thread|
+        puts stdout unless stdout.nil?
+        puts stderr unless stderr.nil?
+      end
     end
 
     # Clean any temporary files used during building.
     def clean
-      FileUtils.rm("tmp/#{@name}-#{@type}-#{@target}.json")
+      FileUtils.rm("#{build_name}.json")
+    end
+
+    private
+
+    def build_name
+      @build_name ||= "#{@name}-#{Time.now.strftime('%Y%m%d%H%M%S')}"
     end
   end
 end
