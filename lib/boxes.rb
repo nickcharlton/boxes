@@ -2,6 +2,7 @@ require 'fileutils'
 require 'pathname'
 require 'yaml'
 require 'open3'
+require 'erb'
 
 require 'claide'
 require 'colored'
