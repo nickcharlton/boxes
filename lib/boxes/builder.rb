@@ -28,6 +28,9 @@ module Boxes
 
     # Run the build.
     def run # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      original_directory = FileUtils.pwd
+      box_name = ''
+
       # render the template
       rendered_template = template.render(name: name,
                                           provider: provider,
@@ -41,9 +44,22 @@ module Boxes
       # execute the packer command
       FileUtils.chdir(Boxes.config.working_dir)
       cmd = "packer build #{build_name}.json"
-      Subprocess.run(cmd) do |stdout, stderr, _thread|
+      status = Subprocess.run(cmd) do |stdout, stderr, _thread|
         puts stdout unless stdout.nil?
         puts stderr unless stderr.nil?
+
+        # catch the name of the artifact
+        if stdout =~ /\.box/
+          box_name = stdout.gsub(/[a-zA-Z0-9:\-_]*?\.box/).first
+        end
+      end
+
+      if status.exitstatus == 0
+        FileUtils.mv(Boxes.config.working_dir + box_name,
+                     "#{original_directory}/#{name}.box")
+      else
+        fail BuildRunError,
+             'The build didn\'t complete successfully. Check the logs.'
       end
     end
 

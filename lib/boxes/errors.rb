@@ -12,5 +12,8 @@ module Boxes
 
     # Raised when an expected argument is missing.
     class MissingArgumentError < BoxesError; end
+
+    # Raised when a build fails.
+    class BuildRunError < BoxesError; end
   end
 end
