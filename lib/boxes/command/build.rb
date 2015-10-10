@@ -39,6 +39,9 @@ module Boxes
         builder = Boxes::Builder.new(env, @build)
         builder.run
         builder.clean
+      rescue Boxes::Errors::BuildRunError => e
+        puts "[!] #{e}".red
+        exit 1
       end
     end
   end
