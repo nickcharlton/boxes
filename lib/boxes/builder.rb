@@ -41,6 +41,13 @@ module Boxes
         f.puts rendered_template
       end
 
+      # set the environment vars
+      Boxes.config.environment_vars.each do |e|
+        e.each do |k, v|
+          ENV[k] = v.to_s
+        end
+      end
+
       # execute the packer command
       FileUtils.chdir(Boxes.config.working_dir)
       cmd = "packer build #{build_name}.json"
