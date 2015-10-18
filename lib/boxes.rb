@@ -1,3 +1,4 @@
+require 'set'
 require 'fileutils'
 require 'pathname'
 require 'yaml'
