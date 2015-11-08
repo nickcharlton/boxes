@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.0.2 (08/11/2015)
+
+* Switches to `open-vm-tools` for VMWare ([20][]).
+* Increases the SSH timeout to 15m. ([25][]).
+
 ## 2.0.1 (18/10/2015)
 
 * Fixes a launch exception relating to configuration.
@@ -14,3 +19,6 @@
 * Maintains an environment for running builds.
 * Parses, validates and combines arguments.
 * Allows the building of all of the previous styles of boxes.
+
+[20]: https://github.com/nickcharlton/boxes/issues/20
+[25]: https://github.com/nickcharlton/boxes/issues/25
