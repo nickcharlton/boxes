@@ -4,7 +4,7 @@
 # the 'ruby' special box type.
 
 chruby_version=0.3.9
-rubyinstall_version=0.5.0
+rubyinstall_version=0.6.0
 
 # install chruby
 wget -O chruby-$chruby_version.tar.gz https://github.com/postmodern/chruby/archive/v$chruby_version.tar.gz
