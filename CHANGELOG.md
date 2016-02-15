@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 2.1.0 (15/02/2015)
+
+* Adds support for Debian Jessie (@kirjatoukka).
+* Adds support for Ubuntu Vivid (15.04) and Wily (15.10).
+* Updates the Debian Wheezy URL to a valid mirror ([24][]).
+* Reverts the switch to `open-vm-tools`, which was breaking certain kernel
+  support.
+* Updates the version of `ruby-install` used in `scripts/ruby.sh`.
+* Removes Ruby 2.1.5, 2.2.0 and 2.2.1.
+* Adds Ruby 2.2.3, 2.2.3 and 2.3.0.
+
 ## 2.0.2 (08/11/2015)
 
 * Switches to `open-vm-tools` for VMWare ([20][]).
@@ -21,4 +32,5 @@
 * Allows the building of all of the previous styles of boxes.
 
 [20]: https://github.com/nickcharlton/boxes/issues/20
+[24]: https://github.com/nickcharlton/boxes/issues/24
 [25]: https://github.com/nickcharlton/boxes/issues/25
