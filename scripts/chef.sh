@@ -10,7 +10,7 @@ version_url=$(echo "$current_version" | awk '/url/{print $2}')
 version_sha=$(echo "$current_version" | awk '/sha256/{print $2}')
 
 # fetch chef
-curl --location $version_url -o chef.deb
+curl --insecure --location $version_url -o chef.deb
 
 # check the file
 echo "$version_sha  chef.deb" > '/tmp/chef-checksum'
