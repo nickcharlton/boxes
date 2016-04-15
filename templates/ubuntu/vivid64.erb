@@ -49,7 +49,7 @@
                 "initrd=/install/initrd.gz -- <enter>"
             ],
 
-            "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'"
+            "shutdown_command": "echo '/sbin/shutdown -h -P now' > /tmp/shutdown.sh; echo 'vagrant'|sudo -S sh '/tmp/shutdown.sh'"
         }
     ],
 
