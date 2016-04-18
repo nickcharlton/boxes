@@ -21,7 +21,6 @@ apt-get -qy upgrade
 apt-get -qy install linux-headers-$(uname -r) build-essential
 apt-get -qy install zlib1g-dev libssl-dev
 apt-get -qy install python-software-properties python-setuptools python-dev
-apt-get -qy install ruby1.9.3
 
 # configure password-less sudo
 usermod -a -G sudo vagrant
