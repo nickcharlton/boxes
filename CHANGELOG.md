@@ -1,6 +1,19 @@
 # CHANGELOG
 
-## 2.1.0 (15/02/2015)
+## 2.2.0 (10/05/2016)
+
+* Update the Trusty ISO image to a working kernel.
+* Update the Jessie ISO image.
+* Allow fetching the Chef deb insecurely (this breaks on Debian).
+* Add the `ca-certificates` package to the Debian preseed.
+* Fixes reasonably consistent shutdown failures.
+* Remove ruby from the default packages in `postinstall.sh`.
+
+## 2.1.1 (02/03/2016)
+
+* Fixes broken Jessie ISO urls.
+
+## 2.1.0 (15/02/2016)
 
 * Adds support for Debian Jessie (@kirjatoukka).
 * Adds support for Ubuntu Vivid (15.04) and Wily (15.10).
