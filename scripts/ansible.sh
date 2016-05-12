@@ -7,6 +7,7 @@ case $(lsb_release -is) in
         apt-get -qy install ansible
     ;;
     *)
+        apt-get -qy install libffi-dev
         easy_install pip
         pip install ansible
     ;;
