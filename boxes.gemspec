@@ -34,6 +34,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.3'
   spec.add_development_dependency 'cucumber', '~> 2.1'
   spec.add_development_dependency 'aruba', '~> 0.8'
-  spec.add_development_dependency 'fakefs', '~> 0.6'
+  spec.add_development_dependency "fakefs", "~> 0.9"
   spec.add_development_dependency 'pry'
 end
