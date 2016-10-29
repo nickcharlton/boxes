@@ -26,14 +26,14 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(/^(test|spec|features)/)
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'claide', '~> 0.9'
-  spec.add_dependency 'colored', '~> 1.2'
+  spec.add_dependency "claide"
+  spec.add_dependency "colored"
 
-  spec.add_development_dependency 'bundler', '~> 1.9'
-  spec.add_development_dependency 'rake', '~> 10.4'
-  spec.add_development_dependency 'rspec', '~> 3.3'
-  spec.add_development_dependency 'cucumber', '~> 2.1'
-  spec.add_development_dependency 'aruba', '~> 0.8'
-  spec.add_development_dependency "fakefs", "~> 0.9"
-  spec.add_development_dependency 'pry'
+  spec.add_development_dependency "bundler"
+  spec.add_development_dependency "rake"
+  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "cucumber"
+  spec.add_development_dependency "aruba"
+  spec.add_development_dependency "fakefs"
+  spec.add_development_dependency "pry"
 end
