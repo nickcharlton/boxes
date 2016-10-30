@@ -11,12 +11,19 @@ echo "Cleaning up dhcp..."
 rm /var/lib/dhcp/*
 
 # make sure Udev doesn't block our network
+# except on systemd systems where this isn't used
 # http://6.ptmc.org/?p=164
-echo "Cleaning up udev..."
-rm /etc/udev/rules.d/70-persistent-net.rules
-mkdir /etc/udev/rules.d/70-persistent-net.rules
-rm -rf /dev/.udev/
-rm /lib/udev/rules.d/75-persistent-net-generator.rules
+case $(lsb_release -cs) in
+    "wily" | "xenial")
+    ;;
+    *)
+    echo "Cleaning up udev..."
+    rm /etc/udev/rules.d/70-persistent-net.rules
+    mkdir /etc/udev/rules.d/70-persistent-net.rules
+    rm -rf /dev/.udev/
+    rm /lib/udev/rules.d/75-persistent-net-generator.rules
+    ;;
+esac
 
 # clean up apt
 echo "Cleaning up apt..."
