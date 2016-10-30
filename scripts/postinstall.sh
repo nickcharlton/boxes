@@ -18,9 +18,8 @@ apt-get -qy update
 apt-get -qy upgrade
 
 # install some oft used packages
-apt-get -qy install linux-headers-$(uname -r) build-essential
-apt-get -qy install zlib1g-dev libssl-dev
-apt-get -qy install python-software-properties python-setuptools python-dev
+apt-get -qy install linux-headers-$(uname -r) build-essential \
+  zlib1g-dev libssl-dev
 
 # configure password-less sudo
 usermod -a -G sudo vagrant
