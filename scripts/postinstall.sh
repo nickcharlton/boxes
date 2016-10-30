@@ -35,10 +35,10 @@ curl -Lo /home/vagrant/.ssh/authorized_keys \
 chmod 0600 /home/vagrant/.ssh/authorized_keys
 chown -R vagrant:vagrant /home/vagrant/.ssh
 
-# under Ubuntu 16.04 (Xenial), networking gets lost on reboot
+# under systemd based Ubuntu systems, networking breaks on first reboot
 # this is because it's renamed to follow the PCI slot
 case $(lsb_release -cs) in
-    "xenial")
+    "wily" | "xenial")
         sed -i "s/ens33/ens32/g" /etc/network/interfaces
     ;;
     *)
