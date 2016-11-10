@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 2.4.0 (10/11/2016)
+
+* Add Ruby 2.3.1.
+* Adds scripts for configuring MySQL and Postgres.
+* Fix test issues where `fakefs` was broken.
+* Unpin the project dependencies as it can be more lenient.
+* Ubuntu Wily (15.10) was also affected by the network naming issue ([31][]).
+* Stop removing persistent networking rules, as this breaks on systemd systems.
+  ([31][]).
+* Reduce the default set of packages which are installed ([32][]).
+
+[31]: https://github.com/nickcharlton/boxes/pull/31
+[32]: https://github.com/nickcharlton/boxes/pull/32
+
 ## 2.3.0 (10/06/2016)
 
 * Add support for Ubuntu Xenial (16.04) ([28][]).
