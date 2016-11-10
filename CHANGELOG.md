@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 2.3.0 (10/06/2016)
+
+* Add support for Ubuntu Xenial (16.04) ([28][]).
+* Remove Ubuntu Vivid (15.04) ([29][]).
+* Add `libffi-dev` for Ansible.
+* Fixes an issue with Xenial where the network is lost after building.
+* Update the Ubuntu Trusty (14.04) ISO image.
+* Update the Debian Jessie ISO.
+
+[29]: https://github.com/nickcharlton/boxes/pull/29
+[28]: https://github.com/nickcharlton/boxes/pull/28
+
 ## 2.2.0 (10/05/2016)
 
 * Update the Trusty ISO image to a working kernel.
