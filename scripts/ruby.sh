@@ -32,6 +32,7 @@ ruby-install ruby 2.2.3
 ruby-install ruby 2.2.4
 ruby-install ruby 2.3.0
 ruby-install ruby 2.3.1
+ruby-install ruby 2.3.3
 
 # update gems and install bundler
 source /usr/local/share/chruby/chruby.sh
