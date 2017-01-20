@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.5.0 (20/01/2017)
+
+* Add Ruby 2.3.3.
+* Removes Rubies 2.2.2, 2.3.0.
+* Add Ruby 2.4.0.
+
 ## 2.4.0 (10/11/2016)
 
 * Add Ruby 2.3.1.
