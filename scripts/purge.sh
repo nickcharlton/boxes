@@ -14,7 +14,7 @@ rm /var/lib/dhcp/*
 # except on systemd systems where this isn't used
 # http://6.ptmc.org/?p=164
 case $(lsb_release -cs) in
-    "wily" | "xenial")
+    "wily" | "xenial" | "yakkety")
     ;;
     *)
     echo "Cleaning up udev..."

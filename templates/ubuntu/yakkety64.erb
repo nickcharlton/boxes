@@ -1,0 +1,64 @@
+{
+    "provisioners": [
+        {
+            "type": "shell",
+            "scripts": [
+                "scripts/postinstall.sh",
+                "scripts/vmtools.sh",
+                <%- @scripts.each do |script| -%>
+                "scripts/<%= script %>",
+                <%- end -%>
+                "scripts/purge.sh"
+            ],
+            "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'"
+        }
+    ],
+
+    "builders": [
+        {
+            "name": "<%= @name %>",
+            "type": "<%= @provider %>-iso",
+            <%- if @provider == "vmware" -%>
+            "guest_os_type": "ubuntu-64",
+            "tools_upload_flavor": "linux",
+            <%- else -%>
+            "guest_os_type": "Ubuntu_64",
+            <%- end -%>
+            "headless": false,
+
+            "iso_url": "http://releases.ubuntu.com/yakkety/ubuntu-16.10-server-amd64.iso",
+            "iso_checksum": "72b0d421da77f1e0c549b4efe6fc6c184e9909d6792f0d1e59b56d63e9705659",
+            "iso_checksum_type": "sha256",
+
+            "ssh_username": "vagrant",
+            "ssh_password": "vagrant",
+            "ssh_timeout": "15m",
+
+            "http_directory": "templates/ubuntu",
+
+            "boot_command": [
+                "<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+                "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+                "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+                "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+                "/install/vmlinuz noapic ",
+                "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+                "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+                "hostname={{ .Name }} ",
+                "fb=false debconf/frontend=noninteractive ",
+                "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+                "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+                "grub-installer/bootdev=/dev/sda ",
+                "initrd=/install/initrd.gz -- <enter>"
+            ],
+
+            "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'"
+        }
+    ],
+
+    "post-processors": [
+        {
+            "type": "vagrant"
+        }
+    ]
+}
