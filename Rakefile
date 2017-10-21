@@ -17,18 +17,6 @@ require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new
 
 ##
-# Cucumber for feature testing.
-##
-require 'rake/clean'
-require 'cucumber'
-require 'cucumber/rake/task'
-
-Cucumber::Rake::Task.new(:features) do |t|
-  t.cucumber_opts = 'features --format pretty -x'
-  t.fork = false
-end
-
-##
 # By default, just run the tests.
 ##
 task default: :spec
