@@ -1,7 +1,10 @@
 require 'spec_helper'
 
 describe Boxes::Subprocess do
-  let(:command) { "spec/support/subprocess_command.rb" }
+  let(:command) do
+    File.expand_path("../../support/subprocess_command.sh", __FILE__).
+      shellescape
+  end
 
   it 'runs a command and yields a block' do
     expect { |b| Boxes::Subprocess.run(command, &b) }.to yield_control
