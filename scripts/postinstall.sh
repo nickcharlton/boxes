@@ -34,10 +34,10 @@ curl -Lo /home/vagrant/.ssh/authorized_keys \
 chmod 0600 /home/vagrant/.ssh/authorized_keys
 chown -R vagrant:vagrant /home/vagrant/.ssh
 
-# under systemd based Ubuntu systems, networking breaks on first reboot
+# under systemd distributions, networking breaks on first reboot
 # this is because it's renamed to follow the PCI slot
 case $(lsb_release -cs) in
-    "wily" | "xenial")
+    "wily" | "xenial" | "stretch")
         sed -i "s/ens33/ens32/g" /etc/network/interfaces
     ;;
     *)

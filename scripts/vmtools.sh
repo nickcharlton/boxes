@@ -16,6 +16,7 @@ case $PACKER_BUILDER_TYPE in
     ;;
     'vmware-iso')
         echo "Installing VMware Tools..."
+        apt-get -qy install fuse
         mkdir -p /mnt/cdrom
         mount -o loop /home/vagrant/linux.iso /mnt/cdrom
 
