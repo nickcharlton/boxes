@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
 # this installs chruby, ruby-install and a selection of rubies and is used in
 # the 'ruby' special box type.
 
 chruby_version=0.3.9
-rubyinstall_version=0.6.0
+rubyinstall_version=0.6.1
 
 # install chruby
 wget -O chruby-$chruby_version.tar.gz https://github.com/postmodern/chruby/archive/v$chruby_version.tar.gz
@@ -27,11 +27,10 @@ cd ruby-install-$rubyinstall_version/
 make install
 
 # install a set of recent MRI Rubies.
-ruby-install ruby 2.2.3
-ruby-install ruby 2.2.4
-ruby-install ruby 2.3.1
-ruby-install ruby 2.3.3
-ruby-install ruby 2.4.0
+ruby-install ruby 2.2.9
+ruby-install ruby 2.3.6
+ruby-install ruby 2.4.3
+ruby-install ruby 2.5.0
 
 # update gems and install bundler
 source /usr/local/share/chruby/chruby.sh
