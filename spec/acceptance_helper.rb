@@ -1,5 +1,8 @@
 require "boxes/testing"
 
+require "support/env"
+require "support/tmp"
+
 RSpec.configure do |config|
   include Boxes::Testing::Matchers
   include Boxes::Testing::Command
