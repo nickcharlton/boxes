@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## 3.0.0 (05/02/2018)
+
+* Update scripts/ruby.sh to follow ruby-lang.org current Rubies ([48]).
+* Fix a bug with Shell Path Expansion ([44]).
+* Add acceptance testing using RSpec ([43], [48], [49]).
+* Remove Cucumber ([42]).
+* Update Ubuntu Xenial to 16.04.3 ([40]).
+* Update Ubuntu Trusty to 14.04.5 ([39]).
+* Update Debian Stretch to 9.3.0 ([38]).
+* Add support for Debian Stretch (9.1).
+* Drop support for Ubuntu Wily 15.10.
+* Switch to a working mirror for Debian Jessie.
+
+[38]: https://github.com/nickcharlton/boxes/pull/38
+[40]: https://github.com/nickcharlton/boxes/pull/40
+[42]: https://github.com/nickcharlton/boxes/pull/42
+[43]: https://github.com/nickcharlton/boxes/pull/43
+[44]: https://github.com/nickcharlton/boxes/pull/44
+[48]: https://github.com/nickcharlton/boxes/pull/48
+[49]: https://github.com/nickcharlton/boxes/pull/49
+
 ## 2.5.0 (20/01/2017)
 
 * Add Ruby 2.3.3.
