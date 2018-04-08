@@ -1,28 +1,43 @@
 #!/bin/bash
 
-# Get the Chef package version through their metadata service.
+# Fetches the Chef package version and sha from the Boxes API, then installs
+# the package.
+
+set -e
+
+boxes_api="https://boxes.io/api/v1"
 platform=$(lsb_release -si | tr '[:upper:]' '[:lower:]')
 release=$(lsb_release -sr)
-version_url="https://www.opscode.com/chef/metadata?v=&prerelease=false&nightlies=false&p=$platform&pv=$release&m=x86_64"
-current_version=$(curl -s "$version_url")
 
-version_url=$(echo "$current_version" | awk '/url/{print $2}')
-version_sha=$(echo "$current_version" | awk '/sha256/{print $2}')
-
-# fetch chef
-curl --insecure --location $version_url -o chef.deb
-
-# check the file
-echo "$version_sha  chef.deb" > '/tmp/chef-checksum'
-shasum -a 256 -c '/tmp/chef-checksum'
-if [ $? -ne 0 ]; then
-    echo "Downloaded Chef package failed to checksum."
-    exit 1
+if [ "$platform" == "debian" ]; then
+	release=$(echo "$release" | cut -d. -f1)
 fi
 
-# install
-dpkg -i chef.deb
+version_url="$boxes_api/metadata/chef?platform=$platform&platform_version=$release"
 
-# cleanup
+echo "Determining current Chef package version..."
+if ! current_version=$(curl --silent --fail "${version_url}"); then
+	>&2 echo "Unable to fetch version information for $platform, $release"
+	exit 1
+fi
+
+version_url=$(echo "$current_version" | python -c  \
+	"import json,sys;obj=json.load(sys.stdin);print obj['url'];")
+version_sha=$(echo "$current_version" | python -c \
+	"import json,sys;obj=json.load(sys.stdin);print obj['sha256'];")
+
+echo "Fetching Chef package..."
+curl --silent --fail "$version_url" -o chef.deb
+
+echo "Verifying downloaded Chef package..."
+downloaded_sha=$(openssl sha256 -r chef.deb)
+if [ "$version_sha *chef.deb" != "$downloaded_sha" ]; then
+	>&2 echo "Unable to verify downloaded chef.deb"
+	echo 2
+fi
+
+echo "Installing Chef package..."
+dpkg --install chef.deb
+
+echo "Tidying up artifacts..."
 rm chef.deb
-rm /tmp/chef-checksum
