@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 3.1.0 (08/04/2018)
+
+* Switch to use the Boxes Metadata API for Chef ([52]).
+* Fix Puppet deb installation ([51])
+
+[51]: https://github.com/nickcharlton/boxes/pull/51
+[52]: https://github.com/nickcharlton/boxes/pull/52
+
 ## 3.0.0 (05/02/2018)
 
 * Update scripts/ruby.sh to follow ruby-lang.org current Rubies ([48]).
