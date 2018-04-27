@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 3.2.0 (27/04/2018)
+
+* Ubuntu Bionic (18.04) support ([53]).
+
+[53]: https://github.com/nickcharlton/boxes/pull/53
+
+
 ## 3.1.0 (08/04/2018)
 
 * Switch to use the Boxes Metadata API for Chef ([52]).
