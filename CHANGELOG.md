@@ -1,11 +1,17 @@
 # CHANGELOG
 
+## 3.3.0 (27/04/2018)
+
+* Revoke Ubuntu Bionic (18.04) support ([53]).
+
+_**Note:** Ubuntu 18.04 changes the way some networking is configured and so
+doesn't correctly boot up._
+
 ## 3.2.0 (27/04/2018)
 
 * Ubuntu Bionic (18.04) support ([53]).
 
 [53]: https://github.com/nickcharlton/boxes/pull/53
-
 
 ## 3.1.0 (08/04/2018)
 
