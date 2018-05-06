@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 3.3.1 (27/04/2018)
+
+* Refresh Ubuntu Xenial ISO image. ([55])
+* Refresh Debian Stretch ISO image. ([54])
+
+[54]: https://github.com/nickcharlton/boxes/pull/54
+[55]: https://github.com/nickcharlton/boxes/pull/55
+
 ## 3.3.0 (27/04/2018)
 
 * Revoke Ubuntu Bionic (18.04) support ([53]).
