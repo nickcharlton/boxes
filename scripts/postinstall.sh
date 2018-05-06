@@ -1,4 +1,10 @@
-# postinstall.sh based upon Mitchell's old basebox example
+#!/bin/sh
+
+##
+# Post install configuration, preparing the box for usage
+#
+# Originally based upon Mitchell's old basebox example
+##
 
 # mark the build time
 date > /etc/vagrant_box_build_time
@@ -34,17 +40,39 @@ curl -Lo /home/vagrant/.ssh/authorized_keys \
 chmod 0600 /home/vagrant/.ssh/authorized_keys
 chown -R vagrant:vagrant /home/vagrant/.ssh
 
-# under systemd distributions, networking breaks on first reboot
-# this is because it's renamed to follow the PCI slot
-case $(lsb_release -cs) in
-    "wily" | "xenial" | "stretch")
-        sed -i "s/ens33/ens32/g" /etc/network/interfaces
-    ;;
-    *)
-    ;;
-esac
+disable_automatic_udev_rules() {
+	echo "Disabling automatic udev rules for network interfaces..."
+
+	# source: http://6.ptmc.org/164/
+	rm -f /etc/udev/rules.d/70-persistent-net.rules
+	ln -s /dev/null /etc/udev/rules.d/70-persistent-net.rules
+	rm -f /lib/udev/rules.d/75-persistent-net-generator.rules
+	rm -rf /dev/.udev/ /var/lib/dhcp/*
+}
+
+disable_predictable_interface_names() {
+	echo "Disabling predictable interface names..."
+
+	sed -i 's/en[[:alnum:]]*/eth0/g' /etc/network/interfaces
+	sed -ie 's/GRUB_CMDLINE_LINUX="\(.*\)"/GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0 \1"/g' /etc/default/grub
+	update-grub
+}
+
+distribution=$(lsb_release -si)
+version=$(lsb_release -sr)
+major_version=$(echo "$version" | awk -F . '{print $1}')
+
+if [ "$distribution" = 'Ubuntu' ]; then
+	if [ "$major_version" -ge "16" ]; then
+		disable_predictable_interface_names
+	fi
+elif [ "$distribution" = 'Debian' ]; then
+	if [ "$major_version" -ge "8" ]; then
+		disable_predictable_interface_names
+	fi
+fi
+
+disable_automatic_udev_rules
 
 # clean up any artifacts
 rm -f /home/vagrant/shutdown.sh
-
-exit
