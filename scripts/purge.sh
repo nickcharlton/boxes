@@ -6,25 +6,6 @@
 # Based on: https://gist.github.com/adrienbrault/3775253
 ##
 
-# tidy up DCHP leases
-echo "Cleaning up dhcp..."
-rm /var/lib/dhcp/*
-
-# make sure Udev doesn't block our network
-# except on systemd systems where this isn't used
-# http://6.ptmc.org/?p=164
-case $(lsb_release -cs) in
-    "wily" | "xenial")
-    ;;
-    *)
-    echo "Cleaning up udev..."
-    rm /etc/udev/rules.d/70-persistent-net.rules
-    mkdir /etc/udev/rules.d/70-persistent-net.rules
-    rm -rf /dev/.udev/
-    rm /lib/udev/rules.d/75-persistent-net-generator.rules
-    ;;
-esac
-
 # clean up apt
 echo "Cleaning up apt..."
 apt-get -qy autoremove
