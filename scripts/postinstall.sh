@@ -58,6 +58,18 @@ disable_predictable_interface_names() {
 	update-grub
 }
 
+configure_netplan() {
+	echo "Creating DHCP netplan config for eth0..."
+
+	cat <<-EOF >/etc/netplan/01-netcfg.yaml;
+	network:
+    version: 2
+    ethernets:
+      eth0:
+        dhcp4: true
+	EOF
+}
+
 distribution=$(lsb_release -si)
 version=$(lsb_release -sr)
 major_version=$(echo "$version" | awk -F . '{print $1}')
@@ -65,6 +77,10 @@ major_version=$(echo "$version" | awk -F . '{print $1}')
 if [ "$distribution" = 'Ubuntu' ]; then
 	if [ "$major_version" -ge "16" ]; then
 		disable_predictable_interface_names
+	fi
+
+	if [ "$major_version" -ge "18" ]; then
+		configure_netplan
 	fi
 elif [ "$distribution" = 'Debian' ]; then
 	if [ "$major_version" -ge "8" ]; then
