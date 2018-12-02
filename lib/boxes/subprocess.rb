@@ -18,14 +18,11 @@ module Boxes
       Open3.popen3(command) do |_stdin, stdout, stderr, thread|
         # read each stream from a new thread
         { out: stdout, err: stderr }.each do |key, stream|
-          Thread.new do
-            stream.each_line do |line|
-              # yield the block depending on the stream
-              if key == :out
-                yield line, nil, thread if block_given?
-              elsif key == :err
-                yield nil, line, thread if block_given?
-              end
+          stream.each_line do |line|
+            if key == :out
+              yield line, nil, thread if block_given?
+            elsif key == :err
+              yield nil, line, thread if block_given?
             end
           end
         end
