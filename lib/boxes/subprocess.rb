@@ -23,7 +23,7 @@ module Boxes
               # yield the block depending on the stream
               if key == :out
                 yield line, nil, thread if block_given?
-              else
+              elsif key == :err
                 yield nil, line, thread if block_given?
               end
             end
