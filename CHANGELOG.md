@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 3.4.0 (02/12/2018)
+
+* Update Debian Stretch ISO to 9.6.0.
+* Update Ubuntu Xenial ISO image to 16.04.4.
+* Update Ubuntu Bionic ISO to 18.04.1.
+* Remove unnecessary thread block.
+* Avoid printing variables which are nil.
+
 ## 3.3.1 (27/04/2018)
 
 * Refresh Ubuntu Xenial ISO image. ([55])
