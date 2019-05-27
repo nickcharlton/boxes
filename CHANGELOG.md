@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 3.5.0 (27/05/2019)
+
+* Refresh Rubies:
+  - Drop 2.1, 2.2,
+  - Add 2.6,
+  - Bump to current patch of 2.3, 2.4, 2.5.
+* Upgrade Ruby to 2.6.3.
+* Update Ubuntu Bionic from 18.04.1 to 18.04.2.
+* Update Ubuntu Xenial from 16.04.5 to 16.04.6.
+* Update Ubuntu Trusty from 14.04.5 to 14.04.6.
+* Update Debian Stretch from 9.6.0 to 9.9.0.
+* Drop Ubuntu Precise (12.04).
+* Drop Debian Wheezy (7).
+
 ## 3.4.0 (02/12/2018)
 
 * Update Debian Stretch ISO to 9.6.0.
