@@ -27,11 +27,10 @@ cd ruby-install-$rubyinstall_version/
 make install
 
 # install a set of recent MRI Rubies.
-ruby-install ruby 2.1.10
-ruby-install ruby 2.2.9
-ruby-install ruby 2.3.6
-ruby-install ruby 2.4.3
-ruby-install ruby 2.5.0
+ruby-install ruby 2.3.8
+ruby-install ruby 2.4.6
+ruby-install ruby 2.5.5
+ruby-install ruby 2.6.3
 
 # update gems and install bundler
 source /usr/local/share/chruby/chruby.sh
