@@ -38,7 +38,7 @@
             "boot_command": [
                 "<esc><wait>",
                 "install ",
-                "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+                "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed-legacy.cfg ",
                 "debian-installer=en_US auto=true locale=en_US kbd-chooser/method=us ",
                 "netcfg/get_hostname={{ .Name }} ",
                 "netcfg/get_domain=vagrantup.com ",
