@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 3.6.0 (04/04/2020)
+
+* Update Rubies to current latest:
+  - 2.4.10
+  - 2.5.8
+  - 2.6.6
+  - 2.7.1
+* Add Debian Buster (10).
+* Switch Debian Stretch to an archive URL.
+* Update Ubuntu Bionic from 18.04.2 to 18.04.4.
+
 ## 3.5.0 (27/05/2019)
 
 * Refresh Rubies:
