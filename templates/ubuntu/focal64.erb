@@ -1,0 +1,53 @@
+{
+    "provisioners": [
+        {
+            "type": "shell",
+            "scripts": [
+                <%= ["postinstall.sh", "vmtools.sh", @scripts].flatten.map { |i| "\"scripts/#{i}\"" }.join(", ") %>
+            ],
+            "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'"
+        }
+    ],
+
+    "builders": [
+        {
+            "name": "<%= @name %>",
+            "type": "<%= @provider %>-iso",
+            <%- if @provider == "vmware" -%>
+            "guest_os_type": "ubuntu-64",
+            "tools_upload_flavor": "linux",
+            <%- else -%>
+            "guest_os_type": "Ubuntu_64",
+            <%- end -%>
+            "headless": true,
+
+            "memory": 1024,
+
+            "iso_url": "http://releases.ubuntu.com/20.04/ubuntu-20.04-live-server-amd64.iso",
+            "iso_checksum": "caf3fd69c77c439f162e2ba6040e9c320c4ff0d69aad1340a514319a9264df9f",
+            "iso_checksum_type": "sha256",
+
+            "ssh_username": "vagrant",
+            "ssh_password": "vagrant",
+            "ssh_handshake_attempts": "50",
+            "ssh_timeout": "10m",
+
+            "http_directory": "templates/ubuntu",
+
+            "boot_wait": "5s",
+            "boot_command": [
+              "<enter><enter><f6><esc><wait> ",
+              "autoinstall ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/",
+              "<enter>"
+            ],
+
+            "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'"
+        }
+    ],
+
+    "post-processors": [
+        {
+            "type": "vagrant"
+        }
+    ]
+}
