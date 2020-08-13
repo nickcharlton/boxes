@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.6.1 (13/08/2020)
+
+* Update Debian Buster from 10.3.0 to 10.5.0
+
 ## 3.6.0 (04/04/2020)
 
 * Update Rubies to current latest:
