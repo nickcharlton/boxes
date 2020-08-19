@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 3.7.0 (19/08/2020)
+
+* Support for Ubuntu 20.04 ([58])
+
+[58]: https://github.com/nickcharlton/boxes/pull/58
+
 ## 3.6.1 (13/08/2020)
 
 * Update Debian Buster from 10.3.0 to 10.5.0
